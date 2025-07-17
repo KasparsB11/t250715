@@ -1,0 +1,46 @@
+name: Cypress Verify PR (Windows)
+
+on:
+  pull_request:
+    branches:
+      - main  # or your default branch
+
+jobs:
+  cypress:
+    name: Run Cypress Tests on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # specify your Node.js version
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run Cypress tests
+        run: |
+          npx cypress run
+        env:
+          # Add any environment variables your tests need
+          CYPRESS_BASE_URL: 'http://localhost:3000'  # example
+
+      # Optional: Upload videos/screenshots for debugging if tests fail
+      - name: Upload Cypress videos
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+      - name: Upload Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
