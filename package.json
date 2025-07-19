@@ -1,10 +1,5 @@
 {
   "devDependencies": {
     "cypress": "^14.5.2"
-  },
-  "scripts": {
-    "start": "http://localhost:3030",
-    "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:3030 cy:run"
   }
 }
