@@ -5,10 +5,14 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        browsers: [chrome, firefox, edge]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cypress run
+      - name: Cypress run in ${{ matrix.browsers }}
         uses: cypress-io/github-action@v6
         with:
           working-directory: ./
