@@ -12,6 +12,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           #working-directory: /home/runner/work/t250715/t250715/
+          working-directory: client
           install: false
           build: npm run build
           start: npm start
