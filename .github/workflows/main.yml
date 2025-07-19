@@ -4,23 +4,18 @@ on: push
 
 
 jobs:
-  cypress:
-    runs-on: ubuntu-latest  # or windows-latest if you prefer Windows
-
+  cypress-run:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
-          node-version: '16'  # specify your Node.js version
-
-      - name: Install dependencies
-        run: npm ci  # or npm install
-
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v4
-        with:
-          start: npm run start # if you need to start a server
+          #working-directory: /home/runner/work/t250715/t250715/
+          working-directory: 
+          install: false
+          build: npm run build
+          start: npm start
+          browser: chrome
           wait-on: 'http://localhost:3000' # URL to wait for
