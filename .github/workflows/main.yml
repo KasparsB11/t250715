@@ -14,4 +14,4 @@ jobs:
         with:
           working-directory: ./
           #build: npm run build
-          start: npx start
+          start: npx cypress run
