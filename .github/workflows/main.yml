@@ -22,6 +22,5 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         with:
-          build: npm run build # if you have a build step
           start: npm run start # if you need to start a server
           wait-on: 'http://localhost:3000' # URL to wait for
