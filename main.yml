@@ -1,9 +1,9 @@
 name: Cypress Verify PR (Windows)
 
-on:
-  pull_request:
-    branches:
-      - main
+on: push
+
+on: pull_request
+
 jobs:
  cypress-run:
   runs-on: windows-latest
