@@ -17,16 +17,17 @@ jobs:
         with:
           working-directory: ./
           browsers: ${{ matrix.browsers }}
-          start: npx cypress run --browser ${{ matrix.browsers }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browsers }}/
+          start: npx cypress run --browser ${{ matrix.browsers }}
+          #start: npx cypress run --browser ${{ matrix.browsers }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browsers }}/
 
-      - name: Merge reports
-        run: npx mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-reports.json
+#      - name: Merge reports
+#        run: npx mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-reports.json
 
-      - name: Generate HTML reports
-        run: npx marge cypress/reports/${{ matrix.browsers }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browsers }} -f "${{ matrix.browsers }}--report.html"
+#      - name: Generate HTML reports
+#        run: npx marge cypress/reports/${{ matrix.browsers }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browsers }} -f "${{ matrix.browsers }}--report.html"
 
-      - name: Upload HTML
-        uses: actions/upload-artifact@v4
-        with:
-          name: Cypress HTML report ${{ matrix.browsers }}
-          path: cypress/reports/${{ matrix.browsers }}
+#      - name: Upload HTML
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: Cypress HTML report ${{ matrix.browsers }}
+#          path: cypress/reports/${{ matrix.browsers }}
