@@ -31,25 +31,8 @@ describe('counter test', () => {
         cy.decrementButton().click()
         cy.get('h1 span').contains(/[0]/)
         cy.log('Counter should be 0')
+        cy.decrementButton().click()
+        cy.get('h1 span').contains(/[0]/)
+        cy.log('Counter should be 0 not -1')
     })
-/*   it.only('passes', () => {
-        cy.visit('index.html')
-    })
-
-
-cy.get('#Button').then(($btn) => {
-  if ($btn.is(':disabled')) {
-    cy.log('Button exists and is disabled!')
-    return
-  } else {
-    cy.log('Button exists and is enabled!')
-    cy.wrap($btn).click()
-  }
-})
-
-
-
-
-
-        */
 })
