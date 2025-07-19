@@ -1,2 +1,4 @@
 .DS_Store
 node_modules/
+Readme.md
+.gitlab-ci.yml

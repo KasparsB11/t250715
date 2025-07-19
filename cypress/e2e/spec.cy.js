@@ -1,5 +1,55 @@
-describe('template spec', () => {
-   it('passes', () => {
-        cy.visit('https://www.google.com/')
+describe('counter test', () => {
+    beforeEach(() => {
+        cy.visit('index.html')
     })
+    it('Has increment and decrement button', () => {
+        cy.incrementButton().contains(/\w{3,}/)
+        cy.log('Increment button is present and contains at least three letters')
+        cy.decrementButton().contains(/\w{3,}/)
+        cy.log('Decrement button is present and contains at least three letters')
+    })
+    it('Has counter text and counter', () => {
+        cy.get('h1').contains(/\w{3,}/)
+        cy.log('Counter text is present')
+        cy.get('h1 span').contains(/\d/)
+        cy.log('Counter field is present')
+    })
+    it('Increment and decrement buttons work', () => {
+        cy.incrementButton().click()
+        cy.get('h1 span').contains(/[1]/)
+        cy.log('Increment button works')
+        cy.decrementButton().click()
+        cy.get('h1 span').contains(/[0]/)
+        cy.log('Decrement button works')
+    })
+    it('Increment and decrement value can not be negative', () => {
+        cy.log('Click on increment')
+        cy.incrementButton().click()
+        cy.get('h1 span').contains(/[1]/)
+        cy.log('Counter should be 1')
+        cy.log('Click on decrement')
+        cy.decrementButton().click()
+        cy.get('h1 span').contains(/[0]/)
+        cy.log('Counter should be 0')
+    })
+/*   it.only('passes', () => {
+        cy.visit('index.html')
+    })
+
+
+cy.get('#Button').then(($btn) => {
+  if ($btn.is(':disabled')) {
+    cy.log('Button exists and is disabled!')
+    return
+  } else {
+    cy.log('Button exists and is enabled!')
+    cy.wrap($btn).click()
+  }
+})
+
+
+
+
+
+        */
 })
