@@ -16,4 +16,17 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: ./
-          start: npx cypress run
+          browsers: ${{ matrix.browsers }}
+          start: npx cypress run --browser ${{ matrix.browsers }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browsers }}/
+
+      - name: Merge reports
+        run: npx mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-reports.json
+
+      - name: Generate HTML reports
+        run: npx merge cypress/reports/${{ matrix.browsers }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browsers }} -f "${{ matrix.browsers }}--report.html"
+
+      - name: Upload HTML
+        uses: action/upload-artifact@v4
+        with:
+          name: Cypress HTML report ${{ matrix.browsers }}
+          path: cypress/reports/${{ matrix.browsers }}
