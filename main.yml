@@ -1,0 +1,19 @@
+name: Cypress Verify PR (Windows)
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+ cypress-run:
+  runs-on: windows-latest
+  steps:
+    name: Checkpoint
+    users: actions/checkout@v4
+    name: Cypress run
+    uses: cypress-io/github-action@v6
+    with:
+      build: npx run build
+      start: npx cypress run
+      env:
+          CYPRESS_BASE_URL: 'http://localhost:3000' 
