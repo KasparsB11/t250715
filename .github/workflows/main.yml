@@ -2,18 +2,26 @@ name: Cypress Verify PR (Windows)
 
 on: push
 
+
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
+  cypress:
+    runs-on: ubuntu-latest  # or windows-latest if you prefer Windows
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          #working-directory: /home/runner/work/t250715/t250715/
-          working-directory: client
-          install: false
-          build: npm run build
-          start: npm start
-          browser: chrome
+          node-version: '16'  # specify your Node.js version
+
+      - name: Install dependencies
+        run: npm ci  # or npm install
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm run build # if you have a build step
+          start: npm run start # if you need to start a server
+          wait-on: 'http://localhost:3000' # URL to wait for
