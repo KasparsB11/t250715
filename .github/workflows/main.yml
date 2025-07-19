@@ -4,28 +4,15 @@ name: Example Tests
 on: push
 
 jobs:
-  example:
-    strategy:
-      fail-fast: false
-      matrix:
-        directory: [
-            basic-mini, # testing cypress/included
-            basic, # testing cypress/browsers
-            chrome-for-testing,
-            chromium,
-            firefox-esr,
-            included-as-non-root,
-          ]
-        os: [
-            ubuntu-24.04, # testing Linux/amd64 platform
-            ubuntu-24.04-arm, # testing Linux/arm64 platform
-          ]
-        exclude:
-          - os: ubuntu-24.04-arm
-            directory: chrome-for-testing # browser not available for Linux/arm64
-    runs-on: ${{ matrix.os }}
+  cypress-run:
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Run test script
-        working-directory: examples/${{ matrix.directory }}
-        run: ./scripts/test.sh
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests with `quiet` parameter
+      - name: Cypress run
+        uses: ./
+        with:
+          working-directory: examples/quiet
+          quiet: true
