@@ -14,6 +14,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          working-directory: /home/runner/work/t250715/t250715/
           build: npm run build
+          working-directory: /home/runner/work/t250715/t250715/
           start: npm start
