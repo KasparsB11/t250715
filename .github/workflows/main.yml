@@ -1,21 +1,17 @@
-name: Cypress Verify PR (Windows)
+name: Cypress Tests
 
 on: push
 
-
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          #working-directory: /home/runner/work/t250715/t250715/
-          working-directory: 
-          install: false
           build: npm run build
           start: npm start
-          browser: chrome
-          wait-on: 'http://localhost:3000' # URL to wait for
