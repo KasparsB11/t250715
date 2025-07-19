@@ -12,7 +12,6 @@ jobs:
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests with `quiet` parameter
       - name: Cypress run
-        uses: ./
         with:
-          working-directory: examples/quiet
+          working-directory: client
           quiet: true
