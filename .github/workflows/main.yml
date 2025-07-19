@@ -5,16 +5,13 @@ on: push
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress tests
-        uses: ./
-        with:
-          working-directory: t250715/t250715/
-          build: npm run build
-          start: npm start
-          wait-on: 'http://localhost:3000'
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Cypress run
+      uses: cypress-io/github-action@v2
+      with:
+        working-directory: client
+        build: npm run build
+        start: npm start
