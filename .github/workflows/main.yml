@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Install Yarn
         run: npm install -g yarn
+      - name: Install Dependencies
+        run: pnpm install
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress run
